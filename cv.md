@@ -17,7 +17,13 @@ I am curious, enthusiastic, disciplined, tolerant and friendly. Also I'm a hardw
 ### Code examples
 
 ### Experience
+* Course project ***'The accounting of clients of a paid clinic'*** using *procedural programming* and *C* 
+* Course project ***'The development of the automated system for the patient accounting'*** using *object-oriented programming* and *C++*
 
 ### Education
+* Currently studying (from 2018) at *Belarusian State University of Informatics and Radioelectronics* in the speciality ***'Information Systems and Technologies (in Economics)'***
+* Completed ***HTML+CSS basics courses*** from *HTML Academy* in 2020
+* Completed ***Business School 'From Idea to Business'*** in 2017
 
 ### English
+*__B2 level__ (CEFR)*
