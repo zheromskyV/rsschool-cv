@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Junior Developer Resume</title>
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Vladislav Zheromsky</h1>
+    </header>
+    <main>
+        <article> 
+        <p><img src="penguin.jpg"></p>
+        <section>
+            <h2>Summary</h2>
+            <p>I am curious, enthusiastic, disciplined, tolerant and friendly.</p>
+            <p>Also I'm a hardworker and quick learner who has allways been keen on studying.</p>
+            <p>Time management, decision-making and prioritizing are the things I am really good at.</p>
+            <p>My persistence, good analytical skills and stress-tolerance make me a reliable person.</p>
+        </section>
+        <section class="contact-info">
+            <h2>Contact Info</h2>
+            <ul>
+                <li><i>E'mail:</i><span id="mail"> vladislavzheromsky@gmail.com</span></li>
+                <li><i>Mobile phone number (Telegram, Viber):</i><span class="phone-number"> 8-044-713-61-85</span></li>
+                <li><i>GitHub: </i><a href="https://github.com/zheromskyV">zheromskyV</a></li>
+            </ul>
+        </section>
+        <section>
+            <h2>Skills</h2>
+            <ul>
+                <li>C/C++, HTML, CSS</li>
+                <li>Have knowledge of object-oriented and procedural programming</li>
+            </ul>
+        </section>
+        <section>
+            <h2>Experience</h2>
+            <ul>
+                <li>Course project <b><i>'The accounting of clients of a paid clinic'</i></b> using <i>procedural programming</i> and <i>C</i></li>
+                <li>Course project <i><b>'The development of the automated system for the patient accounting'</i></b> using <i>object-oriented programming</i> and <i>C++</i></li>
+            </ul>
+        </section>
+        <section>
+            <h2>Education</h2>
+            <ul>
+                <li>Currently studying (from 2018) at <i>Belarusian State University of Informatics and Radioelectronics</i> in the speciality <i><b>'Information Systems and Technologies (in Economics)'</i></b></li>
+                <li>Completed <i><b>HTML+CSS basics courses</i></b> from <i>HTML Academy</i> in 2020</li>
+                <li>Completed <i><b>Business School 'From Idea to Business'</i></b> in 2017</li>
+            </ul>
+        </section>
+        <section class="english">
+            <h2>English</h2>
+            <p><i><b>B2 level</b> (CEFR)</i></p>
+        </section>
+        <section>
+            <h2>Code examples</h2>
+            <p>Here is a code example of a <i>Cryptographer</i> class in C++:</p>
+            <pre><code>
+            // Cryptographer.h
+            #pragma once
+            
+            #include <string>
+            #include <array>
+            
+            class Cryptographer
+            {
+            public:
+            	static void init();
+            
+            	static void encrypt(std::string& str);
+            	static void decrypt(std::string& str);
+            
+            private:
+            	Cryptographer() = delete;
+            	enum class CryptoMode { ENCRYPT, DECRYPT };
+            
+            	static std::array<char, 159> alphabet;
+            	static const std::array<int, 5> key;
+            
+            	static int findPos(const char c);
+            
+            	static void gronsfeld(std::string& str, CryptoMode mode);
+            };
+            </pre></code>
+            <pre><code>
+            // Cryptographer.cpp
+            #include "Cryptographer.h"
+            #include <array>
+            
+            using namespace std;
+            
+            const array<int, 5> Cryptographer::key = { 9, 17, 4, 11, 3 };
+            array<char, 159> Cryptographer::alphabet = {};
+            
+            void Cryptographer::encrypt(string& str)
+            {
+            	gronsfeld(str, CryptoMode::ENCRYPT);
+            }
+        
+            void Cryptographer::decrypt(string& str)
+            {
+            	gronsfeld(str, CryptoMode::DECRYPT);
+            }
+        
+            // initialize alphabet with chars for Eng and Rus
+            void Cryptographer::init()
+            {
+            	int i, j;
+            	for (i = -1, j = 0; i >= -64; i--) {
+            		if (j < alphabet.size())
+            			alphabet[j++] = i;
+            	}
+            	for (i = 32; i <= 126; i++) {
+            		if (j < alphabet.size())
+            			alphabet[j++] = i;
+            	}
+            }
+        
+            // returns char's position in the alphabet
+            int Cryptographer::findPos(const char c)
+            {
+            	int pos = -1;
+            	for (int j = 0; j < alphabet.size(); j++) {
+            		if (alphabet[j] == c) {
+            			pos = j;
+            			break;
+            		}
+            	}
+            	return pos;
+            }
+        
+            // algorithm for encryption and decryption
+            void Cryptographer::gronsfeld(string& str, CryptoMode mode)
+            {
+            	short coder = mode == CryptoMode::ENCRYPT ? 1 : -1;
+            
+            	int begin = 0; // alphabet's head
+            	int end = alphabet.size() - 1; // alphabet's tail
+            
+            	// iterate through the string
+            	for (size_t i = 0; i < str.size(); i++) {
+            		// define the offset based on the key and mode
+            		int offset = key[i % 5] * coder;
+            		// define char current position in the alphabet
+            		int pos = findPos(str.at(i));
+                
+            		// define new char position based on the current position ang the offset
+            		int newPos = -1;
+            		if (pos + offset > end) {
+            			int dif = pos + offset - end;
+            			newPos = begin + dif;
+            		}
+            		else if (pos + offset < begin) {
+            			int dif = pos + offset + begin;
+            			newPos = end + dif;
+            		}
+            		else {
+            			pos += offset;
+            			newPos = pos;
+            		}
+                
+            		// replace the char
+            		str.at(i) = alphabet[newPos];
+            	}
+            }
+            </pre></code>
+        </section>
+        </article>
+    </main>
+</body>
+</html>
